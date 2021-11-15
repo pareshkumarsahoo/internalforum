@@ -30,10 +30,17 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
 
   useEffect(() => {
     FetchQuestion();
+    const config = {
+      headers: {
+       
+         'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    };
     const getQuestionInfo = async () => {
       let Questiondata = await axios.get(
         `https://internalforum.herokuapp.com/api/get/allposts/questionId/${id}`
-      );
+      ,config);
       setuserID(Questiondata.data[0].userID);
       setsolved(Questiondata.data[0].isSolved);
     };
@@ -132,6 +139,8 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     const config = {
       headers: {
         authorization: `bearer ${token}`,
+        'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
       },
     };
 

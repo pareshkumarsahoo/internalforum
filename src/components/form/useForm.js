@@ -73,16 +73,18 @@ const useForm = (validation) => {
     // API END-POINT { /api/login }
     try {
       console.log(values)
+       const config = {
+      headers: {
+       
+         'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    };
       const res = await axios.post("https://internalforum.herokuapp.com/api/login", {
         email: values.email,
         password: values.password,
-      }, {
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-
-        }
-      });
+      }, config,
+      );
 
       window.localStorage.setItem("authorization", res.data.token);
       window.localStorage.setItem(
