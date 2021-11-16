@@ -46,8 +46,12 @@ const AskQuestionPage = () => {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-
-    let splitTags = formData.tags.replace(/\s+/g, " ").trim().split(" ");
+    let splitTags;
+    if (formData.tags != '') {
+        splitTags = formData.tags.replace(/\s+/g, " ").trim().split(" ");
+    }
+   
+    console.log("SPLIT",splitTags)
     let token = window.localStorage.getItem("userdata").split(" ")[2];
     console.log(splitTags);
 
@@ -63,7 +67,7 @@ const AskQuestionPage = () => {
     if (!isValid) {
       console.log(formData, errorData);
     }
-    if (splitTags === "") {
+    if (splitTags != undefined && splitTags.length>0) {
       try {
         await axios.post(
           "https://internalforumapi.invincix.net/api/post/question",
