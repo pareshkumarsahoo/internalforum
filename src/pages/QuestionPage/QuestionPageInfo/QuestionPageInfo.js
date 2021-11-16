@@ -40,7 +40,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     };
     const getQuestionInfo = async () => {
       let Questiondata = await axios.get(
-        `https://internalforum.herokuapp.com/api/get/allposts/questionId/${id}`
+        `https://internalforumapi.invincix.net/api/get/allposts/questionId/${id}`
       ,config);
       setuserID(Questiondata.data[0].userID);
       setsolved(Questiondata.data[0].isSolved);
@@ -64,7 +64,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
       console.log(bodyError);
     }
     try {
-      await axios.post(`https://internalforum.herokuapp.com/api/post/answer/${id}`, {
+      await axios.post(`https://internalforumapi.invincix.net/api/post/answer/${id}`, {
         answeredUserID: userData[0],
         answeredUserName: userData[1],
         answer,
@@ -103,7 +103,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
   const handleDeletebtn = async () => {
     if (isSure) {
       try {
-        await axios.delete(`https://internalforum.herokuapp.com/api/delete/${id}`);
+        await axios.delete(`https://internalforumapi.invincix.net/api/delete/${id}`);
         history.push("/questions");
         toast.success("Question Deleted", {
           position: "top-center",
@@ -149,7 +149,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     if (isConfirm) {
       try {
         await axios.delete(
-          `https://internalforum.herokuapp.com/api/question/${id}/delete/${answerId}`,
+          `https://internalforumapi.invincix.net/api/question/${id}/delete/${answerId}`,
           config
         );
         FetchQuestion();
@@ -175,11 +175,11 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
   const handleSolvedAndUnsolved = async (status) => {
     try {
       await axios.put(
-        `https://internalforum.herokuapp.com/api/question/status/${id}/${status}`
+        `https://internalforumapi.invincix.net/api/question/status/${id}/${status}`
       );
 
       let data = await axios.get(
-        `https://internalforum.herokuapp.com/api/get/allposts/questionId/${id}`
+        `https://internalforumapi.invincix.net/api/get/allposts/questionId/${id}`
       );
       setsolved(data.data[0].isSolved);
 

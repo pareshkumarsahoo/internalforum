@@ -35,7 +35,7 @@ export const FetchQuestion = (status = "all") => {
     dispatch(fetchQuestionRequest());
     try {
       const response = await axios.get(
-        `https://internalforum.herokuapp.com/api/get/allposts/${status}`,
+        `https://internalforumapi.invincix.net/api/get/allposts/${status}`,
         {
           headers: {
             authorization: `bearer ${token}`,
