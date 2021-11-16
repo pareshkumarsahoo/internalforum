@@ -10,7 +10,7 @@ const TagLists = ({ tagID, tagName, tagTitle }) => {
       <Link to={`/question/${tagID}/${str}`}>
         <span className={css.tag_name}>{tagName}</span>
       </Link>
-      <div className={css.about_tag}>{tagTitle} </div>{" "}
+      <div className={css.about_tag}>{tagTitle}</div>{" "}
     </div>
   );
 };

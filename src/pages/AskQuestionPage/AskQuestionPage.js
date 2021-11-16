@@ -18,6 +18,7 @@ const AskQuestionPage = () => {
     bodyError: "",
     tagsError: "",
   });
+  const [isLoading, setLoading] = useState(false);
   const validate = () => {
     let titleError = "";
     let bodyError = "";
@@ -69,6 +70,7 @@ const AskQuestionPage = () => {
     }
     if (splitTags != undefined && splitTags.length>0) {
       try {
+        setLoading(true);
         await axios.post(
           "https://internalforumapi.invincix.net/api/post/question",
           {
@@ -89,7 +91,9 @@ const AskQuestionPage = () => {
           draggable: true,
           progress: undefined,
         });
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
       // CATCH ERROR
@@ -176,10 +180,12 @@ const AskQuestionPage = () => {
           <button
             className={`btn mt-3 ml-4 ${css.btn_color}`}
             id="submit-button"
-            onClick={(e) => handlesubmit(e)}
+            disabled={isLoading}
+            onClick={!isLoading ? (e) => handlesubmit(e) : null}
             name="submit-button"
           >
-            Post Your Question
+            
+             {isLoading ? 'Loading…' : 'Post Your Question'}
           </button>
         </div>
       </div>

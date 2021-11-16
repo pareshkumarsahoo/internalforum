@@ -33,9 +33,9 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     const config = {
       headers: {
        
-         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
       },
     };
     const getQuestionInfo = async () => {
@@ -103,7 +103,16 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
   const handleDeletebtn = async () => {
     if (isSure) {
       try {
-        await axios.delete(`https://internalforumapi.invincix.net/api/delete/${id}`);
+        let token = window.localStorage.getItem("userdata").split(" ")[2];
+         const config = {
+          headers: {
+             authorization: `bearer ${token}`,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+          },
+        };
+        await axios.delete(`http://localhost:5000/api/delete/${id}`,config)
         history.push("/questions");
         toast.success("Question Deleted", {
           position: "top-center",
@@ -173,13 +182,21 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
 
   //------------------- handleSolvedAndUnsolved -----------------------------
   const handleSolvedAndUnsolved = async (status) => {
+    let token = window.localStorage.getItem("userdata").split(" ")[2];
     try {
+       const config = {
+      headers: {
+        authorization: `bearer ${token}`,
+         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+      },
+    };
       await axios.put(
-        `https://internalforumapi.invincix.net/api/question/status/${id}/${status}`
+        `https://internalforumapi.invincix.net/api/question/status/${id}/${status}`,config
       );
-
       let data = await axios.get(
-        `https://internalforumapi.invincix.net/api/get/allposts/questionId/${id}`
+        `https://internalforumapi.invincix.net/api/get/allposts/questionId/${id}`,config
       );
       setsolved(data.data[0].isSolved);
 
