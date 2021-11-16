@@ -1,6 +1,7 @@
 {
   "name": "stackoverflow",
   "version": "0.1.0",
+  "homepage": ".",
   "private": true,
   "proxy": "https://nostalgic-yalow-de4ff8.netlify.app/",
   "dependencies": {
