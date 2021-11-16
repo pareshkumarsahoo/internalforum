@@ -112,7 +112,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
           },
         };
-        await axios.delete(`http://localhost:5000/api/delete/${id}`,config)
+        await axios.delete(`https://internalforumapi.invincix.net/api/delete/${id}`,config)
         history.push("/questions");
         toast.success("Question Deleted", {
           position: "top-center",
@@ -182,7 +182,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
 
   //------------------- handleSolvedAndUnsolved -----------------------------
   const handleSolvedAndUnsolved = async (status) => {
-    let token = window.localStorage.getItem("userdata").split(" ")[2];
+    
     try {
        const config = {
       headers: {
