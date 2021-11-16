@@ -182,7 +182,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
 
   //------------------- handleSolvedAndUnsolved -----------------------------
   const handleSolvedAndUnsolved = async (status) => {
-    
+    let token = window.localStorage.getItem("userdata").split(" ")[2];
     try {
        const config = {
       headers: {
