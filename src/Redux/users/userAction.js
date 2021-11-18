@@ -26,6 +26,7 @@ export const fetchUserFailure = (error) => {
 };
 
 export const FetchUser = () => {
+  
   return async (dispatch) => {
     dispatch(fetchUserRequest());
     let token = window.localStorage.getItem("userdata").split(" ")[2];
@@ -33,6 +34,10 @@ export const FetchUser = () => {
       const response = await axios.get(`${process.env.BASE_URL}/get/users`, {
         headers: {
           authorization: `bearer ${token}`,
+           'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+
         },
       });
       const users = response.data;
