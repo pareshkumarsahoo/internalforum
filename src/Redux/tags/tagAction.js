@@ -4,7 +4,7 @@ import {
   FETCH_TAG_SUCCESS,
   FETCH_TAG_REQUEST,
 } from "./tagTypes";
-
+import urlConfig from '../../config.json';
 export const fetchTagRequest = () => {
   return {
     type: FETCH_TAG_REQUEST,
@@ -31,7 +31,7 @@ export const FetchTag = (fetchSearch) => {
     let token = window.localStorage.getItem("userdata").split(" ")[2];
     try {
       const response = await axios.get(
-        `${process.env.BASE_URL}/get/questions/${fetchSearch}`,
+        `${urlConfig.BASE_URL}/get/questions/${fetchSearch}`,
         {
           headers: {
             authorization: `bearer ${token}`,

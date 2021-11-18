@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import urlConfig from '../../config.json';
 import "../../../node_modules/react-toastify/dist/ReactToastify.css";
 toast.configure();
 
@@ -81,7 +82,7 @@ const useForm = (validation) => {
           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
       },
     };
-      const res = await axios.post(`${process.env.BASE_URL}/login`, {
+      const res = await axios.post(`${urlConfig.BASE_URL}/login`, {
         email: values.email,
         password: values.password,
       }, config,

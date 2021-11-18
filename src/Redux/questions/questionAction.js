@@ -4,7 +4,7 @@ import {
   FETCH_QUESTION_SUCCESS,
   FETCH_QUESTION_REQUEST,
 } from "./questionTypes";
-
+import urlConfig from '../../config.json';
 export const fetchQuestionRequest = () => {
   return {
     type: FETCH_QUESTION_REQUEST,
@@ -35,7 +35,7 @@ export const FetchQuestion = (status = "all") => {
     dispatch(fetchQuestionRequest());
     try {
       const response = await axios.get(
-        `${process.env.BASE_URL}/get/allposts/${status}`,
+        `${urlConfig.BASE_URL}/get/allposts/${status}`,
         {
           headers: {
             authorization: `bearer ${token}`,

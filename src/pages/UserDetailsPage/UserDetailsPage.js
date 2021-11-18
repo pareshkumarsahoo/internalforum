@@ -4,6 +4,7 @@ import PageTitle from "../../components/PageTitle/PageTitle";
 import css from "./userDetails.module.css";
 import Askquestion from "./Askquestion";
 import { Spinner } from "react-bootstrap";
+import urlConfig from '../../config.json';
 import axios from "axios";
 
 const UserDetailsPage = () => {
@@ -13,7 +14,7 @@ const UserDetailsPage = () => {
     const getaskQuestions = async () => {
       let token = window.localStorage.getItem("userdata").split(" ")[2];
       const res = await axios.get(
-        `${process.env.BASE_URL}/get/users/askquestion/${id}`,
+        `${urlConfig.BASE_URL}/get/users/askquestion/${id}`,
         {
           headers: {
             authorization: `bearer ${token}`,

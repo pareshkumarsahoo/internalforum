@@ -4,7 +4,7 @@ import {
   FETCH_USER_SUCCESS,
   FETCH_USER_REQUEST,
 } from "./userTypes";
-
+import urlConfig from '../../config.json';
 export const fetchUserRequest = () => {
   return {
     type: FETCH_USER_REQUEST,
@@ -31,7 +31,7 @@ export const FetchUser = () => {
     dispatch(fetchUserRequest());
     let token = window.localStorage.getItem("userdata").split(" ")[2];
     try {
-      const response = await axios.get(`${process.env.BASE_URL}/get/users`, {
+      const response = await axios.get(`${urlConfig.BASE_URL}/get/users`, {
         headers: {
           authorization: `bearer ${token}`,
            'Access-Control-Allow-Origin': '*',

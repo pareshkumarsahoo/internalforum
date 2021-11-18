@@ -4,7 +4,9 @@ import axios from "axios";
 import "../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import css from "./askquestion.module.css";
 import { toast } from "react-toastify";
+import urlConfig from '../../config.json';
 import "../../../node_modules/react-toastify/dist/ReactToastify.css";
+
 toast.configure();
 
 const AskQuestionPage = () => {
@@ -72,7 +74,7 @@ const AskQuestionPage = () => {
       try {
         setLoading(true);
         await axios.post(
-          `${process.env.BASE_URL}/post/question`,
+          `${urlConfig.BASE_URL}/post/question`,
           {
             userID: userData[0],
             userName: userData[1],

@@ -12,6 +12,7 @@ import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.cs
 import { toast } from "react-toastify";
 import "../../../../node_modules/react-toastify/dist/ReactToastify.css";
 import DeleteModal from "./DeleteModal";
+import urlConfig from '../../../config.json';
 import AnswerDeleteModal from "./AnswerDeleteModal";
 // TOAST CONFIG
 toast.configure();
@@ -40,7 +41,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     };
     const getQuestionInfo = async () => {
       let Questiondata = await axios.get(
-        `${process.env.BASE_URL}/get/allposts/questionId/${id}`
+        `${urlConfig.BASE_URL}/get/allposts/questionId/${id}`
       ,config);
       setuserID(Questiondata.data[0].userID);
       setsolved(Questiondata.data[0].isSolved);
@@ -64,7 +65,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
       console.log(bodyError);
     }
     try {
-      await axios.post(`${process.env.BASE_URL}/post/answer/${id}`, {
+      await axios.post(`${urlConfig.BASE_URL}/post/answer/${id}`, {
         answeredUserID: userData[0],
         answeredUserName: userData[1],
         answer,
@@ -112,7 +113,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
           },
         };
-        await axios.delete(`${process.env.BASE_URL}/delete/${id}`,config)
+        await axios.delete(`${urlConfig.BASE_URL}/delete/${id}`,config)
         history.push("/questions");
         toast.success("Question Deleted", {
           position: "top-center",
@@ -158,7 +159,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     if (isConfirm) {
       try {
         await axios.delete(
-          `${process.env.BASE_URL}/question/${id}/delete/${answerId}`,
+          `${urlConfig.BASE_URL}/question/${id}/delete/${answerId}`,
           config
         );
         FetchQuestion();
@@ -193,10 +194,10 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
       },
     };
       await axios.put(
-        `${process.env.BASE_URL}/question/status/${id}/${status}`,config
+        `${urlConfig.BASE_URL}/question/status/${id}/${status}`,config
       );
       let data = await axios.get(
-        `${process.env.BASE_URL}/get/allposts/questionId/${id}`,config
+        `${urlConfig.BASE_URL}/get/allposts/questionId/${id}`,config
       );
       setsolved(data.data[0].isSolved);
       toast.success("Status Updated ", {
