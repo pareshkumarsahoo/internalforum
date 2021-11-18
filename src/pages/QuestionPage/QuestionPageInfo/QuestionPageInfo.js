@@ -40,7 +40,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     };
     const getQuestionInfo = async () => {
       let Questiondata = await axios.get(
-        `https://internalforumapi.invincix.net/api/get/allposts/questionId/${id}`
+        `${process.env.BASE_URL}/get/allposts/questionId/${id}`
       ,config);
       setuserID(Questiondata.data[0].userID);
       setsolved(Questiondata.data[0].isSolved);
@@ -64,7 +64,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
       console.log(bodyError);
     }
     try {
-      await axios.post(`https://internalforumapi.invincix.net/api/post/answer/${id}`, {
+      await axios.post(`${process.env.BASE_URL}/post/answer/${id}`, {
         answeredUserID: userData[0],
         answeredUserName: userData[1],
         answer,
@@ -112,7 +112,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
             "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
           },
         };
-        await axios.delete(`https://internalforumapi.invincix.net/api/delete/${id}`,config)
+        await axios.delete(`${process.env.BASE_URL}/delete/${id}`,config)
         history.push("/questions");
         toast.success("Question Deleted", {
           position: "top-center",
@@ -158,7 +158,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     if (isConfirm) {
       try {
         await axios.delete(
-          `https://internalforumapi.invincix.net/api/question/${id}/delete/${answerId}`,
+          `${process.env.BASE_URL}/question/${id}/delete/${answerId}`,
           config
         );
         FetchQuestion();
@@ -187,19 +187,18 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
        const config = {
       headers: {
         authorization: `bearer ${token}`,
-         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
       },
     };
       await axios.put(
-        `https://internalforumapi.invincix.net/api/question/status/${id}/${status}`,config
+        `${process.env.BASE_URL}/question/status/${id}/${status}`,config
       );
       let data = await axios.get(
-        `https://internalforumapi.invincix.net/api/get/allposts/questionId/${id}`,config
+        `${process.env.BASE_URL}/get/allposts/questionId/${id}`,config
       );
       setsolved(data.data[0].isSolved);
-
       toast.success("Status Updated ", {
         position: "top-center",
         autoClose: 5000,

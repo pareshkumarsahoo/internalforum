@@ -35,7 +35,7 @@ export const FetchQuestion = (status = "all") => {
     dispatch(fetchQuestionRequest());
     try {
       const response = await axios.get(
-        `https://internalforumapi.invincix.net/api/get/allposts/${status}`,
+        `${process.env.BASE_URL}/get/allposts/${status}`,
         {
           headers: {
             authorization: `bearer ${token}`,

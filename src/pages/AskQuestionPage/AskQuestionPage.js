@@ -72,7 +72,7 @@ const AskQuestionPage = () => {
       try {
         setLoading(true);
         await axios.post(
-          "https://internalforumapi.invincix.net/api/post/question",
+          `${process.env.BASE_URL}/post/question`,
           {
             userID: userData[0],
             userName: userData[1],

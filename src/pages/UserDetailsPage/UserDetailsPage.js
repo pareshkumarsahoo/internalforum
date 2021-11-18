@@ -13,7 +13,7 @@ const UserDetailsPage = () => {
     const getaskQuestions = async () => {
       let token = window.localStorage.getItem("userdata").split(" ")[2];
       const res = await axios.get(
-        `https://internalforumapi.invincix.net/api/get/users/askquestion/${id}`,
+        `${process.env.BASE_URL}/get/users/askquestion/${id}`,
         {
           headers: {
             authorization: `bearer ${token}`,
