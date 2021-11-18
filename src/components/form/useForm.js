@@ -74,18 +74,11 @@ const useForm = (validation) => {
     // API END-POINT { /api/login }
     try {
       console.log(values)
-       const config = {
-      headers: {
        
-         'Access-Control-Allow-Origin': '*',
-           'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-      },
-    };
       const res = await axios.post(`${urlConfig.BASE_URL}/login`, {
         email: values.email,
         password: values.password,
-      }, config,
+      }
       );
 
       window.localStorage.setItem("authorization", res.data.token);

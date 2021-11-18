@@ -31,18 +31,10 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
 
   useEffect(() => {
     FetchQuestion();
-    const config = {
-      headers: {
-       
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
-      },
-    };
+    
     const getQuestionInfo = async () => {
       let Questiondata = await axios.get(
-        `${urlConfig.BASE_URL}/get/allposts/questionId/${id}`
-      ,config);
+        `${urlConfig.BASE_URL}/get/allposts/questionId/${id}`);
       setuserID(Questiondata.data[0].userID);
       setsolved(Questiondata.data[0].isSolved);
     };
@@ -108,12 +100,10 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
          const config = {
           headers: {
              authorization: `bearer ${token}`,
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-            "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+           
           },
         };
-        await axios.delete(`${urlConfig.BASE_URL}/delete/${id}`,config)
+        await axios.delete(`${urlConfig.BASE_URL}/delete/${id}`)
         history.push("/questions");
         toast.success("Question Deleted", {
           position: "top-center",
@@ -150,9 +140,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
     const config = {
       headers: {
         authorization: `bearer ${token}`,
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-           "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+       
       },
     };
 
@@ -188,9 +176,7 @@ const QuestionPageInfo = ({ Questionreducer, FetchQuestion }) => {
        const config = {
       headers: {
         authorization: `bearer ${token}`,
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept"
+      
       },
     };
       await axios.put(
